@@ -1,0 +1,159 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    color: #333;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Light Mode - Container */
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 50%;
+    max-width: 500px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* Input Field */
+input {
+    width: 80%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+    transition: border 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0px 0px 5px rgba(40, 167, 69, 0.5);
+}
+
+/* Button */
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s, transform 0.2s;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+/* Shortened URL Display */
+p {
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+/* Navbar */
+.navbar {
+    position: absolute;
+    top: 0;
+    /* left: 0; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Theme Toggle Button */
+#themeToggle {
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background: #333;
+    color: white;
+    border-radius: 6px;
+    transition: background 0.3s, color 0.3s;
+}
+
+#themeToggle:hover {
+    background: #444;
+}
+
+/* Dark Mode */
+.dark-mode {
+    background: #1e1e2f;
+    color: #e4e4e4;
+}
+
+.dark-mode .container {
+    background: #2a2a3c;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode input {
+    background-color: #3a3a4f;
+    color: #e4e4e4;
+    border: 1px solid #555;
+}
+
+.dark-mode input:focus {
+    border-color: #4caf50;
+    box-shadow: 0px 0px 5px rgba(76, 175, 80, 0.5);
+}
+
+.dark-mode button {
+    background-color: #4caf50;
+}
+
+.dark-mode button:hover {
+    background-color: #3d8b40;
+}
+
+.dark-mode .navbar {
+    background: #2a2a3c;
+    box-shadow: 0px 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .logo {
+    color: white;
+}
+
+.dark-mode #themeToggle {
+    background: white;
+    color: black;
+}
+
+.dark-mode #themeToggle:hover {
+    background: #ddd;
+}
+
+.dark-mode #shortenedUrl>a{
+    color: antiquewhite;
+}

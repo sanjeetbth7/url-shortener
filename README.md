@@ -1,0 +1,1 @@
+Go to https://app.bitly.com/ and update when this is delpyed as that link will be added in cv
