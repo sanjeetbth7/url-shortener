@@ -1,1 +1,1 @@
-Go to https://app.bitly.com/ and update when this is delpyed as that link will be added in cv
+chage the index.html file present in current folder , write depload link by replaci *https://github.com/sanjeetbth7/url-shortenerng*  url
