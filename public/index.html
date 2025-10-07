@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Shortener</title>
+    <title>⚡ URL Shortener</title>
     <link rel="stylesheet" href="styles.css">
-</head>
+    </head>
 <body>
     
     <nav class="navbar">
-        <span class="logo">URL Shortener</span>
+        <span class="logo">⚡ URL Shortener</span>
         <button id="themeToggle">Light Mode</button>
     </nav>
 
     <div class="container">
         <h1>URL Shortener</h1>
-        <input type="text" id="urlInput" placeholder="Enter URL to shorten">
-        <button id="shortenBtn">Shorten URL</button>
-        <p id="shortenedUrl"></p>
+        
+        <div class="input-group">
+            <input type="text" id="urlInput" placeholder="Enter URL to shorten (e.g., https://google.com)">
+            <button id="shortenBtn">Shorten</button>
+        </div>
+
+        <p id="shortenedUrl">
+            </p>
     </div>
 
     <script src="script.js"></script>

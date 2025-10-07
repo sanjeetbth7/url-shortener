@@ -1,131 +1,203 @@
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Changed font */
     text-align: center;
     background-color: #f4f4f4;
     color: #333;
-    height: 100vh;
+    min-height: 100vh; /* Use min-height for better content handling */
     width: 100vw;
-    overflow: hidden;
+    overflow-x: hidden; /* Prevent horizontal scroll */
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
-    padding: 5px;
+    padding: 0; /* Remove body padding */
     transition: background 0.3s, color 0.3s;
 }
 
 /* Light Mode - Container */
 .container {
     background: white;
-    padding: 25px;
-    border-radius: 12px;
-    width: 50%;
-    max-width: 500px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s, box-shadow 0.3s;
+    padding: 30px 20px; /* Adjusted padding */
+    border-radius: 15px; /* Softer border-radius */
+    width: 90%; /* Responsive width */
+    max-width: 550px; /* Slightly increased max-width */
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+    transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
-/* Input Field */
-input {
-    width: 80%;
-    padding: 12px;
-    margin: 12px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
+h1 {
+    color: #28a745; /* Green header */
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+/* Input Field and Wrapper */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Spacing between elements */
+}
+
+input#urlInput {
+    width: 100%; /* Full width within the group */
+    padding: 15px; /* Larger padding for better touch targets */
+    margin: 0; /* Remove default margin */
+    border: 2px solid #ddd; /* Clearer border */
+    border-radius: 8px;
+    font-size: 17px;
     background-color: #fff;
     color: #333;
-    transition: border 0.3s;
+    transition: border 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* Include padding/border in element's total width/height */
 }
 
-input:focus {
+input#urlInput:focus {
     outline: none;
-    border-color: #28a745;
-    box-shadow: 0px 0px 5px rgba(40, 167, 69, 0.5);
+    border-color: #1e7e34; /* Darker green focus */
+    box-shadow: 0px 0px 8px rgba(40, 167, 69, 0.4);
 }
 
 /* Button */
 button {
     background-color: #28a745;
     color: white;
-    padding: 12px 18px;
+    padding: 15px 25px; /* Larger padding */
     border: none;
-    font-size: 16px;
+    font-size: 17px;
     cursor: pointer;
-    border-radius: 6px;
-    transition: background 0.3s, transform 0.2s;
-    margin: 5px;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+    margin: 5px 0;
+    width: 100%; /* Full width for better mobile UX */
+    font-weight: 600;
+}
+
+button#shortenBtn {
+    max-width: 250px; /* Limit the width of the main button */
 }
 
 button:hover {
     background-color: #218838;
-    transform: scale(1.05);
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
 }
 
 /* Shortened URL Display */
-p {
-    margin-top: 15px;
-    font-size: 18px;
+#shortenedUrl {
+    margin-top: 25px;
+    font-size: 1em;
+    padding: 15px;
+    border: 1px dashed #28a745;
+    border-radius: 8px;
+    display: flex; /* Flex for link and button */
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 10px;
+}
+
+#shortenedUrl a {
+    color: #28a745;
+    text-decoration: none;
+    font-weight: bold;
+    word-break: break-all; /* Ensure long links wrap */
+    flex-grow: 1; /* Take up available space */
+    text-align: left;
+}
+
+/* Copy Button Style */
+#copyBtn {
+    background-color: #007bff; /* Blue for copy action */
+    padding: 10px 15px;
+    font-size: 14px;
+    width: auto; /* Override full-width for this smaller button */
+    max-width: 120px;
+}
+
+#copyBtn:hover {
+    background-color: #0056b3;
+    transform: scale(1.03);
 }
 
 /* Navbar */
 .navbar {
-    position: absolute;
+    position: fixed; /* Use fixed for better top placement */
     top: 0;
-    /* left: 0; */
+    left: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 15px 20px;
+    /* padding: 15px 5%; */
     background: #ffffff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure navbar is on top */
 }
 
 /* Logo */
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #28a745; /* Logo color */
+    letter-spacing: 1px;
 }
 
 /* Theme Toggle Button */
 #themeToggle {
-    padding: 8px 14px;
-    font-size: 14px;
+    padding: 10px 16px;
+    font-size: 15px;
     cursor: pointer;
     border: none;
     background: #333;
     color: white;
     border-radius: 6px;
     transition: background 0.3s, color 0.3s;
+    width: auto; /* Override full-width */
 }
 
 #themeToggle:hover {
     background: #444;
 }
 
-/* Dark Mode */
+/* --- Dark Mode Styles --- */
+
 .dark-mode {
-    background: #1e1e2f;
-    color: #e4e4e4;
+    background: #121212; /* Very dark background */
+    color: #f0f0f0;
 }
 
 .dark-mode .container {
-    background: #2a2a3c;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    background: #1e1e1e;
+    box-shadow: 0px 8px 30px rgba(255, 255, 255, 0.1);
 }
 
-.dark-mode input {
-    background-color: #3a3a4f;
-    color: #e4e4e4;
-    border: 1px solid #555;
+.dark-mode h1 {
+    color: #4caf50;
 }
 
-.dark-mode input:focus {
+.dark-mode #shortenedUrl {
+    border: 1px dashed #4caf50;
+}
+
+.dark-mode #shortenedUrl a {
+    color: #76ff7a; /* Lighter green link */
+}
+
+.dark-mode input#urlInput {
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+    border: 2px solid #444;
+}
+
+.dark-mode input#urlInput:focus {
     border-color: #4caf50;
-    box-shadow: 0px 0px 5px rgba(76, 175, 80, 0.5);
+    box-shadow: 0px 0px 8px rgba(76, 175, 80, 0.4);
 }
 
 .dark-mode button {
@@ -136,24 +208,64 @@ p {
     background-color: #3d8b40;
 }
 
+.dark-mode #copyBtn {
+    background-color: #3b82f6; /* Blue for copy action in dark mode */
+}
+
+.dark-mode #copyBtn:hover {
+    background-color: #1e40af;
+}
+
 .dark-mode .navbar {
-    background: #2a2a3c;
-    box-shadow: 0px 2px 10px rgba(255, 255, 255, 0.1);
+    background: #1e1e1e;
+    box-shadow: 0px 2px 10px rgba(255, 255, 255, 0.05);
 }
 
 .dark-mode .logo {
-    color: white;
+    color: #4caf50;
 }
 
 .dark-mode #themeToggle {
-    background: white;
-    color: black;
+    background: #f0f0f0;
+    color: #121212;
 }
 
 .dark-mode #themeToggle:hover {
     background: #ddd;
 }
 
-.dark-mode #shortenedUrl>a{
-    color: antiquewhite;
+/* --- Responsiveness: Tablets and above (min-width: 600px) --- */
+@media (min-width: 600px) {
+    .container {
+        padding: 40px;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    .input-group {
+        flex-direction: row; /* Input and button side-by-side */
+        gap: 15px;
+    }
+
+    input#urlInput {
+        flex-grow: 1; /* Input takes up more space */
+        width: auto;
+    }
+
+    button#shortenBtn {
+        width: auto;
+        max-width: none;
+        margin: 0;
+    }
+
+    #shortenedUrl {
+        padding: 15px 20px;
+        flex-wrap: nowrap;
+    }
+
+    #copyBtn {
+        margin-left: 15px; /* Separate copy button from link */
+    }
 }
