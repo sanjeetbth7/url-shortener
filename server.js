@@ -2,15 +2,22 @@ import express from "express";
 import mongoose from "mongoose";
 import shortid from "shortid";
 import dotenv from "dotenv";
-import path from "path";
+// import path from "path";
 
 
 dotenv.config();
 const app = express();
-const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(express.static("public")); // Serve frontend files
+
+// CORS middleware
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 mongoose.connect(process.env.DBLINK_Local) // use DBLINK to connect to mongodb atlas
 .then(()=>{

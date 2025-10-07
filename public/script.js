@@ -2,15 +2,23 @@ document.getElementById("shortenBtn").addEventListener("click", async () => {
     const urlInput = document.getElementById("urlInput").value;
     if (!urlInput) return alert("Please enter a URL");
 
-    const response = await fetch("/shorten", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ originalUrl: urlInput }),
-    });
+    try {
+        const response = await fetch("/shorten", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ originalUrl: urlInput }),
+        });
 
-    const data = await response.json();
-    document.getElementById("shortenedUrl").innerHTML = 
-        `Short URL: <a href="/${data.shortUrl}" target="_blank">http://localhost:5000/${data.shortUrl}</a>`;
+        const data = await response.json();
+        const baseUrl = window.location.origin;
+        const shortUrl = `${baseUrl}/${data.shortUrl}`;
+        
+        const resultDiv = document.getElementById("shortenedUrl");
+        resultDiv.innerHTML = `Short URL: <a href="/${data.shortUrl}" target="_blank">${shortUrl}</a>`;
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Error shortening URL. Please start the server first.");
+    }
 });
 
 
