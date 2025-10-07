@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error("Error:", error);
-            alert("Connection error: Ensure your server is running and reachable.");
+            alert("Connection error: Ensure  server is busy or not reachable.");
         }
     });
 });
