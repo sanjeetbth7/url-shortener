@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. Theme Toggle Logic ---
     const updateThemeDisplay = (isDarkMode) => {
-        themeToggle.textContent = isDarkMode ? "Dark Mode" : "Light Mode";
+        themeToggle.textContent = isDarkMode ? "Light Mode" : "Dark Mode";
         localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
     };
 
