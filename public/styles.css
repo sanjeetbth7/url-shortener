@@ -1,104 +1,168 @@
 /* General Styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Changed font */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
     background-color: #f4f4f4;
     color: #333;
-    min-height: 100vh; /* Use min-height for better content handling */
+    min-height: 100vh;
     width: 100vw;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     margin: 0;
-    padding: 0; /* Remove body padding */
+    padding: 0;
     transition: background 0.3s, color 0.3s;
 }
 
-/* Light Mode - Container */
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #28a745;
+    letter-spacing: 1px;
+}
+
+/* Container */
 .container {
     background: white;
-    padding: 30px 20px; /* Adjusted padding */
-    border-radius: 15px; /* Softer border-radius */
-    width: 90%; /* Responsive width */
-    max-width: 550px; /* Slightly increased max-width */
-    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
-    transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+    padding: 30px 20px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 550px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s, box-shadow 0.3s;
+    margin: 100px auto 20px;
 }
 
-h1 {
-    color: #28a745; /* Green header */
+h1, h2 {
+    color: #28a745;
     margin-bottom: 20px;
-    font-size: 2em;
 }
 
-/* Input Field and Wrapper */
+/* Auth Forms */
+#authContainer {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#authContainer input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#authContainer button {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#authContainer button:hover {
+    background-color: #218838;
+}
+
+#authContainer p {
+    margin-top: 15px;
+}
+
+#authContainer a {
+    color: #28a745;
+    text-decoration: none;
+}
+
+/* Input Group */
 .input-group {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px; /* Spacing between elements */
+    gap: 10px;
 }
 
 input#urlInput {
-    width: 100%; /* Full width within the group */
-    padding: 15px; /* Larger padding for better touch targets */
-    margin: 0; /* Remove default margin */
-    border: 2px solid #ddd; /* Clearer border */
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
     border-radius: 8px;
     font-size: 17px;
     background-color: #fff;
     color: #333;
     transition: border 0.3s, box-shadow 0.3s;
-    box-sizing: border-box; /* Include padding/border in element's total width/height */
+    box-sizing: border-box;
 }
 
 input#urlInput:focus {
     outline: none;
-    border-color: #1e7e34; /* Darker green focus */
+    border-color: #1e7e34;
     box-shadow: 0px 0px 8px rgba(40, 167, 69, 0.4);
 }
 
-/* Button */
+/* Buttons */
 button {
     background-color: #28a745;
     color: white;
-    padding: 15px 25px; /* Larger padding */
+    padding: 15px 25px;
     border: none;
     font-size: 17px;
     cursor: pointer;
     border-radius: 8px;
-    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
-    margin: 5px 0;
-    width: 100%; /* Full width for better mobile UX */
+    transition: background 0.3s, transform 0.2s;
+    margin: 5px;
     font-weight: 600;
-}
-
-button#shortenBtn {
-    max-width: 250px; /* Limit the width of the main button */
 }
 
 button:hover {
     background-color: #218838;
-    transform: translateY(-2px); /* Lift effect */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
 }
 
-button:active {
-    transform: translateY(0);
+#themeToggle {
+    padding: 10px 16px;
+    font-size: 15px;
+    background: #333;
+    color: white;
+    width: auto;
 }
 
 /* Shortened URL Display */
 #shortenedUrl {
     margin-top: 25px;
-    font-size: 1em;
     padding: 15px;
     border: 1px dashed #28a745;
     border-radius: 8px;
-    display: flex; /* Flex for link and button */
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Allow wrapping on small screens */
     gap: 10px;
 }
 
@@ -106,69 +170,62 @@ button:active {
     color: #28a745;
     text-decoration: none;
     font-weight: bold;
-    word-break: break-all; /* Ensure long links wrap */
-    flex-grow: 1; /* Take up available space */
+    word-break: break-all;
+    flex-grow: 1;
     text-align: left;
 }
 
-/* Copy Button Style */
-#copyBtn {
-    background-color: #007bff; /* Blue for copy action */
-    padding: 10px 15px;
-    font-size: 14px;
-    width: auto; /* Override full-width for this smaller button */
-    max-width: 120px;
+/* Profile Section */
+#profileSection {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-#copyBtn:hover {
-    background-color: #0056b3;
-    transform: scale(1.03);
-}
-
-/* Navbar */
-.navbar {
-    position: fixed; /* Use fixed for better top placement */
-    top: 0;
-    left: 0;
-    width: 100%;
+.url-item {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    /* padding: 15px 5%; */
-    background: #ffffff;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Ensure navbar is on top */
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
 }
 
-/* Logo */
-.logo {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #28a745; /* Logo color */
-    letter-spacing: 1px;
+.url-item div:first-child {
+    flex-grow: 1;
+    text-align: left;
 }
 
-/* Theme Toggle Button */
-#themeToggle {
-    padding: 10px 16px;
-    font-size: 15px;
-    cursor: pointer;
-    border: none;
-    background: #333;
-    color: white;
-    border-radius: 6px;
-    transition: background 0.3s, color 0.3s;
-    width: auto; /* Override full-width */
+.url-item div:last-child {
+    display: flex;
+    gap: 10px;
 }
 
-#themeToggle:hover {
-    background: #444;
+.url-item button {
+    padding: 8px 15px;
+    font-size: 14px;
+    margin: 0;
 }
 
-/* --- Dark Mode Styles --- */
+.url-item strong {
+    color: #28a745;
+    display: block;
+    margin-bottom: 5px;
+}
 
+.url-item p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.url-item small {
+    color: #999;
+}
+
+/* Dark Mode */
 .dark-mode {
-    background: #121212; /* Very dark background */
+    background: #121212;
     color: #f0f0f0;
 }
 
@@ -177,25 +234,26 @@ button:active {
     box-shadow: 0px 8px 30px rgba(255, 255, 255, 0.1);
 }
 
-.dark-mode h1 {
+.dark-mode .navbar {
+    background: #1e1e1e;
+    box-shadow: 0px 2px 10px rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode h1, .dark-mode h2 {
     color: #4caf50;
 }
 
-.dark-mode #shortenedUrl {
-    border: 1px dashed #4caf50;
+.dark-mode .logo {
+    color: #4caf50;
 }
 
-.dark-mode #shortenedUrl a {
-    color: #76ff7a; /* Lighter green link */
-}
-
-.dark-mode input#urlInput {
+.dark-mode input {
     background-color: #2c2c2c;
     color: #f0f0f0;
     border: 2px solid #444;
 }
 
-.dark-mode input#urlInput:focus {
+.dark-mode input:focus {
     border-color: #4caf50;
     box-shadow: 0px 0px 8px rgba(76, 175, 80, 0.4);
 }
@@ -208,64 +266,48 @@ button:active {
     background-color: #3d8b40;
 }
 
-.dark-mode #copyBtn {
-    background-color: #3b82f6; /* Blue for copy action in dark mode */
-}
-
-.dark-mode #copyBtn:hover {
-    background-color: #1e40af;
-}
-
-.dark-mode .navbar {
-    background: #1e1e1e;
-    box-shadow: 0px 2px 10px rgba(255, 255, 255, 0.05);
-}
-
-.dark-mode .logo {
-    color: #4caf50;
-}
-
 .dark-mode #themeToggle {
     background: #f0f0f0;
     color: #121212;
 }
 
-.dark-mode #themeToggle:hover {
-    background: #ddd;
+.dark-mode .url-item {
+    background: #2c2c2c;
+    border-color: #444;
 }
 
-/* --- Responsiveness: Tablets and above (min-width: 600px) --- */
+.dark-mode .url-item strong {
+    color: #76ff7a;
+}
+
+.dark-mode .url-item p {
+    color: #ccc;
+}
+
+.dark-mode #shortenedUrl {
+    border-color: #4caf50;
+}
+
+.dark-mode #shortenedUrl a {
+    color: #76ff7a;
+}
+
+/* Responsive */
 @media (min-width: 600px) {
-    .container {
-        padding: 40px;
-    }
-
-    h1 {
-        font-size: 2.5em;
-    }
-
     .input-group {
-        flex-direction: row; /* Input and button side-by-side */
+        flex-direction: row;
         gap: 15px;
     }
 
     input#urlInput {
-        flex-grow: 1; /* Input takes up more space */
-        width: auto;
+        flex-grow: 1;
     }
 
     button#shortenBtn {
         width: auto;
-        max-width: none;
-        margin: 0;
     }
 
-    #shortenedUrl {
-        padding: 15px 20px;
+    .url-item {
         flex-wrap: nowrap;
-    }
-
-    #copyBtn {
-        margin-left: 15px; /* Separate copy button from link */
     }
 }

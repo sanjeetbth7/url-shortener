@@ -10,19 +10,52 @@
     
     <nav class="navbar">
         <span class="logo">⚡ URL Shortener</span>
-        <button id="themeToggle">Dark Mode</button>
+        <div class="nav-buttons">
+            <button id="profileBtn" style="display: none;">Profile</button>
+            <button id="logoutBtn" style="display: none;">Logout</button>
+            <button id="loginBtn">Login</button>
+            <button id="themeToggle">Dark Mode</button>
+        </div>
     </nav>
 
     <div class="container">
-        <h1>URL Shortener</h1>
-        
-        <div class="input-group">
-            <input type="text" id="urlInput" placeholder="Enter URL to shorten (e.g., https://google.com)">
-            <button id="shortenBtn">Shorten</button>
+        <!-- Auth Forms -->
+        <div id="authContainer">
+            <div id="loginForm">
+                <h2>Login</h2>
+                <input type="email" id="loginEmail" placeholder="Email">
+                <input type="password" id="loginPassword" placeholder="Password">
+                <button id="loginSubmit">Login</button>
+                <p>Don't have an account? <a href="#" id="showRegister">Register</a></p>
+            </div>
+            
+            <div id="registerForm" style="display: none;">
+                <h2>Register</h2>
+                <input type="text" id="registerUsername" placeholder="Username">
+                <input type="email" id="registerEmail" placeholder="Email">
+                <input type="password" id="registerPassword" placeholder="Password">
+                <button id="registerSubmit">Register</button>
+                <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+            </div>
         </div>
 
-        <p id="shortenedUrl">
-            </p>
+        <!-- Main App -->
+        <div id="mainApp" style="display: none;">
+            <h1>URL Shortener</h1>
+            
+            <div class="input-group">
+                <input type="text" id="urlInput" placeholder="Enter URL to shorten (e.g., https://google.com)">
+                <button id="shortenBtn">Shorten</button>
+            </div>
+
+            <p id="shortenedUrl"></p>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="profileSection" style="display: none;">
+            <h2>My URLs</h2>
+            <div id="urlsList"></div>
+        </div>
     </div>
 
     <script src="script.js"></script>

@@ -1,57 +1,32 @@
 import express from "express";
 import mongoose from "mongoose";
-import shortid from "shortid";
 import dotenv from "dotenv";
-// import path from "path";
-
+import authRoutes from "./routes/auth.js";
+import urlRoutes from "./routes/url.js";
+import { redirectUrl } from "./controllers/urlController.js";
 
 dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(express.static("public")); // Serve frontend files
+app.use(express.static("public"));
 
 // CORS middleware
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
 
-mongoose.connect(process.env.DBLINK_Local) // use DBLINK to connect to mongodb atlas
-.then(()=>{
-    console.log("Database is connected")
-}
-).catch((err)=>{ console.log(err)})
+mongoose.connect(process.env.DBLINK_Local)
+.then(() => console.log("Database is connected"))
+.catch((err) => console.log(err));
 
-const UrlSchema = new mongoose.Schema({
-  originalUrl: { type: String, unique: true },
-  shortUrl: { type: String, unique: true },
-});
-
-const Url = mongoose.model("Url", UrlSchema);
-
-// API to shorten URL
-app.post("/shorten", async (req, res) => {
-  const { originalUrl } = req.body;
-
-  let urlEntry = await Url.findOne({ originalUrl });
-  if (urlEntry) return res.json({ shortUrl: urlEntry.shortUrl });
-
-  const shortUrl = shortid.generate();
-  urlEntry = await Url.create({ originalUrl, shortUrl });
-
-  res.json({ shortUrl });
-});
-
-// API to redirect shortened URL
-app.get("/:shortUrl", async (req, res) => {
-  const urlEntry = await Url.findOne({ shortUrl: req.params.shortUrl });
-  if (urlEntry) return res.redirect(urlEntry.originalUrl);
-  
-  res.status(404).json({ error: "URL not found" });
-});
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/url', urlRoutes);
+app.get('/:shortUrl', redirectUrl);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
