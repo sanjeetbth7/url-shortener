@@ -233,11 +233,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 urlItem.innerHTML = `
                     <div>
                         <strong>${window.location.origin}/${url.shortUrl}</strong>
-                        <p>${url.originalUrl}</p>
+                        <p class="original-url" data-id="${url._id}">${url.originalUrl}</p>
                         <small>Clicks: ${url.clicks} | Created: ${new Date(url.createdAt).toLocaleDateString()}</small>
                     </div>
                     <div>
-                        <button onclick="editUrl('${url._id}', '${url.originalUrl}')">Edit</button>
+                        <button onclick="editUrl('${url._id}')">Edit</button>
                         <button onclick="deleteUrl('${url._id}')">Delete</button>
                     </div>
                 `;
@@ -249,28 +249,67 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Global functions for edit/delete
-    window.editUrl = async (id, currentUrl) => {
-        const newUrl = prompt('Enter new URL:', currentUrl);
-        if (!newUrl) return;
-
-        try {
-            const response = await fetch(`/api/url/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${authToken}`
-                },
-                body: JSON.stringify({ originalUrl: newUrl })
-            });
-
-            if (response.ok) {
-                loadUserUrls();
-            } else {
-                alert('Failed to update URL');
+    window.editUrl = (id) => {
+        const urlElement = document.querySelector(`p[data-id="${id}"]`);
+        const currentUrl = urlElement.textContent;
+        
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = currentUrl;
+        input.style.cssText = 'width:100%;padding:5px;margin:5px 0;border:1px solid #ddd;border-radius:4px;font-size:14px;';
+        
+        const saveBtn = document.createElement('button');
+        saveBtn.textContent = 'Save';
+        saveBtn.style.cssText = 'padding:5px 10px;font-size:12px;margin:2px;background-color:#28a745;color:white;border:none;border-radius:4px;cursor:pointer;';
+        
+        const cancelBtn = document.createElement('button');
+        cancelBtn.textContent = 'Cancel';
+        cancelBtn.style.cssText = 'padding:5px 10px;font-size:12px;margin:2px;background-color:#dc3545;color:white;border:none;border-radius:4px;cursor:pointer;';
+        
+        urlElement.style.display = 'none';
+        urlElement.parentNode.insertBefore(input, urlElement);
+        urlElement.parentNode.insertBefore(saveBtn, urlElement);
+        urlElement.parentNode.insertBefore(cancelBtn, urlElement);
+        
+        input.focus();
+        
+        const saveEdit = async () => {
+            const newUrl = input.value.trim();
+            if (!newUrl) return;
+            
+            try {
+                const response = await fetch(`/api/url/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({ originalUrl: newUrl })
+                });
+                
+                if (response.ok) {
+                    loadUserUrls();
+                } else {
+                    alert('Failed to update URL');
+                }
+            } catch (error) {
+                alert('Update failed');
             }
-        } catch (error) {
-            alert('Update failed');
-        }
+        };
+        
+        const cancelEdit = () => {
+            input.remove();
+            saveBtn.remove();
+            cancelBtn.remove();
+            urlElement.style.display = 'block';
+        };
+        
+        saveBtn.onclick = saveEdit;
+        cancelBtn.onclick = cancelEdit;
+        input.onkeypress = (e) => {
+            if (e.key === 'Enter') saveEdit();
+            if (e.key === 'Escape') cancelEdit();
+        };
     };
 
     window.deleteUrl = async (id) => {
