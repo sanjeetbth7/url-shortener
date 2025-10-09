@@ -11,7 +11,10 @@
     <nav class="navbar">
         <span class="logo">⚡ URL Shortener</span>
         <div class="nav-buttons">
-            <button id="profileBtn" style="display: none;">Profile</button>
+            <div id="userProfile" style="display: none;">
+                <span id="userAvatar">👤</span>
+                <span id="userName">User</span>
+            </div>
             <button id="logoutBtn" style="display: none;">Logout</button>
             <button id="loginBtn">Login</button>
             <button id="themeToggle">Dark Mode</button>
@@ -31,7 +34,7 @@
             
             <div id="registerForm" style="display: none;">
                 <h2>Register</h2>
-                <input type="text" id="registerUsername" placeholder="Username">
+                <input type="text" id="registerName" placeholder="Full Name">
                 <input type="email" id="registerEmail" placeholder="Email">
                 <input type="password" id="registerPassword" placeholder="Password">
                 <button id="registerSubmit">Register</button>
@@ -51,9 +54,12 @@
             <p id="shortenedUrl"></p>
         </div>
 
-        <!-- Profile Section -->
-        <div id="profileSection" style="display: none;">
-            <h2>My URLs</h2>
+        <!-- Dashboard Section -->
+        <div id="dashboardSection" style="display: none;">
+            <div class="dashboard-header">
+                <button id="backToMainBtn">← Back</button>
+                <h2>My URLs</h2>
+            </div>
             <div id="urlsList"></div>
         </div>
     </div>

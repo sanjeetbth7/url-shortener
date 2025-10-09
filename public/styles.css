@@ -23,7 +23,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5%;
+    padding: 10px 15px;
     background: #ffffff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
@@ -32,11 +32,51 @@ body {
 
 .nav-buttons {
     display: flex;
-    gap: 10px;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#userProfile {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: #f0f0f0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#userProfile:hover {
+    background: #e0e0e0;
+}
+
+#userAvatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #28a745;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#userName {
+    font-weight: 600;
+    color: #333;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
 }
 
 .logo {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: #28a745;
     letter-spacing: 1px;
@@ -147,11 +187,16 @@ button:hover {
 }
 
 #themeToggle {
-    padding: 10px 16px;
-    font-size: 15px;
+    padding: 8px 12px;
+    font-size: 13px;
     background: #333;
     color: white;
     width: auto;
+}
+
+#loginBtn, #logoutBtn {
+    padding: 8px 12px;
+    font-size: 13px;
 }
 
 /* Shortened URL Display */
@@ -175,10 +220,34 @@ button:hover {
     text-align: left;
 }
 
-/* Profile Section */
-#profileSection {
+/* Dashboard Section */
+#dashboardSection {
     max-width: 800px;
     margin: 0 auto;
+}
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#backToMainBtn {
+    padding: 6px 12px;
+    font-size: 13px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin: 0;
+}
+
+#backToMainBtn:hover {
+    background-color: #5a6268;
+    transform: none;
 }
 
 .url-item {
@@ -271,6 +340,30 @@ button:hover {
     color: #121212;
 }
 
+.dark-mode #userProfile {
+    background: #2c2c2c;
+}
+
+.dark-mode #userProfile:hover {
+    background: #3c3c3c;
+}
+
+.dark-mode #userAvatar {
+    background: #4caf50;
+}
+
+.dark-mode #userName {
+    color: #f0f0f0;
+}
+
+.dark-mode #backToMainBtn {
+    background-color: #495057;
+}
+
+.dark-mode #backToMainBtn:hover {
+    background-color: #6c757d;
+}
+
 .dark-mode .url-item {
     background: #2c2c2c;
     border-color: #444;
@@ -292,8 +385,77 @@ button:hover {
     color: #76ff7a;
 }
 
-/* Responsive */
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 8px 10px;
+    }
+    
+    .logo {
+        font-size: 1rem;
+    }
+    
+    .nav-buttons {
+        gap: 5px;
+    }
+    
+    #userName {
+        display: none;
+    }
+    
+    #themeToggle {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+    
+    #loginBtn, #logoutBtn {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+    
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .url-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .url-item div:last-child {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+/* Tablet and Desktop */
 @media (min-width: 600px) {
+    .navbar {
+        padding: 15px 5%;
+    }
+    
+    .logo {
+        font-size: 1.6rem;
+    }
+    
+    .nav-buttons {
+        gap: 10px;
+    }
+    
+    #userAvatar {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+    
+    #userName {
+        max-width: 120px;
+        font-size: 16px;
+    }
+    
     .input-group {
         flex-direction: row;
         gap: 15px;

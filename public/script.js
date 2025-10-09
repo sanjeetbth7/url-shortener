@@ -7,18 +7,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById("loginForm");
     const registerForm = document.getElementById("registerForm");
     const mainApp = document.getElementById("mainApp");
-    const profileSection = document.getElementById("profileSection");
+    const dashboardSection = document.getElementById("dashboardSection");
     
     // Nav buttons
     const loginBtn = document.getElementById("loginBtn");
-    const profileBtn = document.getElementById("profileBtn");
+    const userProfile = document.getElementById("userProfile");
+    const userAvatar = document.getElementById("userAvatar");
+    const userName = document.getElementById("userName");
     const logoutBtn = document.getElementById("logoutBtn");
+    const backToMainBtn = document.getElementById("backToMainBtn");
     
     // Form elements
     const loginEmail = document.getElementById("loginEmail");
     const loginPassword = document.getElementById("loginPassword");
     const loginSubmit = document.getElementById("loginSubmit");
-    const registerUsername = document.getElementById("registerUsername");
+    const registerName = document.getElementById("registerName");
     const registerEmail = document.getElementById("registerEmail");
     const registerPassword = document.getElementById("registerPassword");
     const registerSubmit = document.getElementById("registerSubmit");
@@ -30,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlsList = document.getElementById("urlsList");
 
     // Auth state
-    let currentUser = null;
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     let authToken = localStorage.getItem('authToken');
 
     // Theme Toggle
@@ -52,30 +55,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const showAuth = () => {
         authContainer.style.display = 'block';
         mainApp.style.display = 'none';
-        profileSection.style.display = 'none';
+        dashboardSection.style.display = 'none';
         loginBtn.style.display = 'inline-block';
-        profileBtn.style.display = 'none';
+        userProfile.style.display = 'none';
         logoutBtn.style.display = 'none';
     };
 
     const showMainApp = () => {
         authContainer.style.display = 'none';
         mainApp.style.display = 'block';
-        profileSection.style.display = 'none';
+        dashboardSection.style.display = 'none';
         loginBtn.style.display = 'none';
-        profileBtn.style.display = 'inline-block';
+        userProfile.style.display = 'flex';
         logoutBtn.style.display = 'inline-block';
     };
 
-    const showProfile = () => {
+    const showDashboard = () => {
         authContainer.style.display = 'none';
         mainApp.style.display = 'none';
-        profileSection.style.display = 'block';
+        dashboardSection.style.display = 'block';
         loadUserUrls();
     };
 
+    const updateUserDisplay = (user) => {
+        userName.textContent = user.name;
+        userAvatar.textContent = user.avatar || user.name.charAt(0).toUpperCase();
+    };
+
     // Check if user is logged in
-    if (authToken) {
+    if (authToken && currentUser) {
+        updateUserDisplay(currentUser);
         showMainApp();
     } else {
         showAuth();
@@ -95,20 +104,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     loginBtn.addEventListener("click", showAuth);
-    profileBtn.addEventListener("click", showProfile);
+    userProfile.addEventListener("click", showDashboard);
+    backToMainBtn.addEventListener("click", showMainApp);
     logoutBtn.addEventListener("click", () => {
         localStorage.removeItem('authToken');
+        localStorage.removeItem('currentUser');
         authToken = null;
+        currentUser = null;
         showAuth();
     });
 
     // Register
     registerSubmit.addEventListener("click", async () => {
-        const username = registerUsername.value.trim();
+        const name = registerName.value.trim();
         const email = registerEmail.value.trim();
         const password = registerPassword.value.trim();
 
-        if (!username || !email || !password) {
+        if (!name || !email || !password) {
             alert('Please fill all fields');
             return;
         }
@@ -117,14 +129,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, email, password })
+                body: JSON.stringify({ name, email, password })
             });
 
             const data = await response.json();
             if (response.ok) {
                 authToken = data.token;
-                localStorage.setItem('authToken', authToken);
                 currentUser = data.user;
+                localStorage.setItem('authToken', authToken);
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                updateUserDisplay(currentUser);
                 showMainApp();
             } else {
                 alert(data.error);
@@ -154,8 +168,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             if (response.ok) {
                 authToken = data.token;
-                localStorage.setItem('authToken', authToken);
                 currentUser = data.user;
+                localStorage.setItem('authToken', authToken);
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                updateUserDisplay(currentUser);
                 showMainApp();
             } else {
                 alert(data.error);
@@ -306,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         saveBtn.onclick = saveEdit;
         cancelBtn.onclick = cancelEdit;
-        input.onkeypress = (e) => {
+        input.onkeydown = (e) => {
             if (e.key === 'Enter') saveEdit();
             if (e.key === 'Escape') cancelEdit();
         };
